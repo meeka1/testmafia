@@ -10,7 +10,7 @@ from authentication.serializers import UserSerializer
 @api_view(['GET', 'POST']) 
 def signup(request): # function to signup the user based on username, email, password
 
-    user_data = json.loads(request) # parses dict/json
+    user_data = request.data
     username = user_data['username']
     email = user_data['email']
     password = user_data['password']
@@ -27,8 +27,9 @@ def signup(request): # function to signup the user based on username, email, pas
 
 @api_view(['GET', 'POST'])
 def signin(request): # function to signin the user based on username and password
+
+    user_data = request.data
     
-    user_data = json.loads(request) # parses dict/json
     username = user_data['username']
     password = user_data['password']
 
@@ -58,7 +59,7 @@ def read_users(request): # function to read all the info of users from database
 @api_view(['GET'])
 def get_user(request): # function to get the info of one user based on username
 
-    user_data = json.loads(request) # parses dict/json
+    user_data = request.data
     username = user_data['username']
     
     try:
@@ -75,7 +76,7 @@ def get_user(request): # function to get the info of one user based on username
 @api_view(['DELETE'])
 def delete_user(request): # function to delete the user based on username
 
-    user_data = json.loads(request) # parses dict/json
+    user_data = request.data
     username = user_data['username']
 
     user_delete = User.objects.filter(username=username).delete()
