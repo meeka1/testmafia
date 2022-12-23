@@ -33,15 +33,17 @@ def signin(request): # function to signin the user based on username and passwor
     username = user_data['username']
     password = user_data['password']
 
-    match_response = User.objects.filter(username=username, \
+    match_response = User.objects.filter(username=username, 
                                             password=password).values()
 
     if not bool(match_response): # if username or password is incorrect
-        return JsonResponse({'message': "Username or password is incorrect"}, 
-                                status=401)
+        return JsonResponse({'message': "Username or password is incorrect",
+                                'user_info': list(match_response)}, 
+                                    status=401)
     else:
-        return JsonResponse({'message': "Successfully signed in"}, 
-                                status=200)
+        return JsonResponse({'message': "Successfully signed in",
+                                'user_info': list(match_response)}, 
+                                    status=200)
 
 
 @api_view(['GET'])
