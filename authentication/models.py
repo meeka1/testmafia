@@ -1,9 +1,9 @@
 from django.db import models
 
-# Create your models here.
 class User(models.Model):
-    username = models.CharField(max_length=70, blank=False, default='')
-    email = models.CharField(max_length=200,blank=False, default='')
+    id = models.AutoField(primary_key=True)
+    username = models.CharField(max_length=70, blank=False)
+    email = models.CharField(max_length=200,blank=False)
     password = models.CharField(max_length=50)
 
     def __str__(self) -> str:
